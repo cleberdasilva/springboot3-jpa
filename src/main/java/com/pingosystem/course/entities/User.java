@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.aot.generate.GeneratedTypeReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //em um dos lados das classes associadas, evitar loop infinito
 	@OneToMany(mappedBy = "client") //identificar como esta mapeado na class order
 	private List<Order> orders = new ArrayList();
 	
