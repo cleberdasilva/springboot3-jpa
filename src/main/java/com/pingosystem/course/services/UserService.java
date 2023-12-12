@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.pingosystem.course.entities.User;
 import com.pingosystem.course.repositories.UserRepository;
+import com.pingosystem.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	
 	public User finById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)); //antes era obj.get e retorna erro 500 agora retorna o meu erro
 	}
 	
 	public User insert(User obj) {
