@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.pingosystem.course.entities.Category;
 import com.pingosystem.course.entities.Order;
 import com.pingosystem.course.entities.OrderItem;
+import com.pingosystem.course.entities.Payment;
 import com.pingosystem.course.entities.Product;
 import com.pingosystem.course.entities.User;
 import com.pingosystem.course.entities.enums.OrderStatus;
@@ -83,6 +84,15 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		//passar os dados do pagamento
+		Payment pay1 = new Payment(null,  Instant.parse("2023-12-12T21:53:07Z"), o1);
+		
+		//para gravar um pagamento eu eu faço o set dos dados
+		o1.setPayment(pay1);
+		
+		//e não chamo o repository de payment, mas sim do pedido - orderRepository
+		orderRepository.save(o1);
 	}
 	
 }
