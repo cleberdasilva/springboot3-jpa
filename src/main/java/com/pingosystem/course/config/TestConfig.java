@@ -22,7 +22,7 @@ import com.pingosystem.course.repositories.ProductRepository;
 import com.pingosystem.course.repositories.UserRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner{
 
 	@Autowired
